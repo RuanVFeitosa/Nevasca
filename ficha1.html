@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@200&display=swap" rel="stylesheet">
+      
+
+    <link rel="stylesheet" href="CSS/styles.css" />
+
+    <title>Ficha do personagem</title>
+  </head>
+  <body>
+    <span id="menu-toggle" onclick="openNav()">&#9776; </span>
+<span onclick="transitionToPage('https:www.google.com')"></span>
+    <!-- modal -->
+    <div id="diceAttributes" class="modal">
+      <div class="modal-content">
+        <img class="modalDice" src="./img/dado.png" alt="Dado" />
+        <h2 id="diceNumber"></h2>
+        <p id="diceType"></p>
+      </div>
+    </div>
+
+    <div id="lifeModal" class="modal with-input">
+      <div class="modal-content">
+        <h2>MODIFICAR VIDA</h2>
+        <hr />
+        <form class="formModal" id="changeLife">
+          <h3>Atual</h3>
+          <input type="number" name="current" id="lifeCurrent" min="0" />
+          <h3>Máximo</h3>
+          <input type="number" name="max" id="lifeMax" min="0" />
+          <input type="submit" value="Salvar" />
+        </form>
+      </div>
+    </div>
+
+    <div id="effortModal" class="modal with-input">
+      <div class="modal-content">
+        <h2>MODIFICAR SANIDADE</h2>
+        <hr />
+        <form class="formModal" id="changeeffort">
+          <h3>Atual</h3>
+          <input
+            type="number"
+            name="effortCurrent"
+            id="effortCurrent"
+            min="0"
+          />
+          <h3>Máximo</h3>
+          <input type="number" name="effortMax" id="effortMax" min="0" />
+          <input type="submit" value="Salvar" />
+        </form>
+      </div>
+    </div>
+
+    <div id="addWeaponModal" class="modal with-input">
+      <div class="modal-content">
+        <h2>ADICIONAR ARMA</h2>
+        <hr />
+        <form id="addWeaponForm" action="">
+          <table class="weapons" id="newWeapon">
+            <tr>
+              <th>Nome</th>
+              <th>Tipo</th>
+              <th>Dano</th>
+              <th>Num. Atual</th>
+              <th>Num. Máximo</th>
+              <th>Ataque</th>
+              <th>Alcance</th>
+              <th>Defeito</th>
+              <th>Área</th>
+            </tr>
+            <tr>
+              <td>
+                <input type="text" name="weaponName" id="weaponName" />
+              </td>
+              <td>
+                <select id="weaponType" name="weaponType">
+                  <option value="fire">Fogo</option>
+                  <option value="arch">Arco</option>
+                  <option value="fight">Briga</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" name="weaponDamage" id="weaponDamege" />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="weaponNumCurrent"
+                  id="weaponNumCurrent"
+                />
+              </td>
+              <td>
+                <input type="text" name="weaponNumMax" id="weaponNumMax" />
+              </td>
+              <td>
+                <input type="text" name="weaponAttack" id="weaponAttack" />
+              </td>
+              <td>
+                <input type="text" name="weaponReach" id="weaponReach" />
+              </td>
+              <td>
+                <input type="text" name="weaponDefect" id="weaponDefect" />
+              </td>
+              <td>
+                <input type="text" name="weaponArea" id="weaponArea" />
+              </td>
+            </tr>
+          </table>
+          <input type="submit" value="Salvar" />
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="details border">
+        <h2 class="grid-title">DETALHES PESSOAIS</h2>
+        <hr />
+
+        <div class="inputs">
+          <h4>Jogador</h4>
+          <input type="text" name="player" id="player" value="" />
+          <h4>Ocupação</h4>
+          <input type="text" name="occupation" id="occupation" value="" />
+          <h4>Idade</h4>
+          <input type="text" name="age" id="age" value="" />
+          <h4>Sexo</h4>
+          <select id="sex" name="sex">
+            <option value="male">Masculino</option>
+            <option value="female">Feminino</option>
+            <option value="other">Outros</option>
+          </select>
+          <h4></h4>
+          <input type="text" name="birthplace" id="birthplace" value="" />
+          <br>
+          <br>
+          <h4>Classe</h4>
+          <select>
+            <option></option>
+            <option>Aniquilador</option>
+            <option>Especialista</option>
+            <option >Vendetta</option>
+            <option>Supremo</option>
+            <option>Mundano</option>
+          </select>
+              <h4>Especialidade</h4>
+              <input type="text" name="player" id="player" value="" />
+              <h4>?</h4>
+              <select>
+                <option>?</option>
+                <option>?</option>
+                <option>?</option>
+                <option>?</option>
+                <option>?</option>
+              </select>
+        </div>
+      </div>
+      <div class="character">
+        <div class="characterHeader">
+          <img class="characterPhoto" src="./img/images.jpg" width="100px" height="100px" alt="Foto" />
+          <br>
+          <p>Nome do Personagem</p>
+          <input type="text" name="name" id="name" value="" />
+        </div>
+<br>
+<br>
+        <div class="bars">
+          <h4>Vida</h4>
+          <div class="bar">
+            <div class="lifeBar" style="width: 0%">
+              <p class="barcount" id="lifeCount"></p>
+            </div>
+          </div>
+          <div class="checkboxs">
+            <form action="">
+              <input type="checkbox" id="lesion" name="lesion" value="lesion" />
+              <label for="lesion"> Lesão grave</label>
+              <input type="checkbox" id="injury" name="injury" value="injury" />
+              <label for="injury"> Lesionamento</label>
+              <input type="checkbox" id="dying" name="dying" value="dying" />
+              <label for="dying"> Morrendo</label>
+            </form>
+          </div>
+          <br>
+          <hr>
+          <h4>Pontos de Esforço</h4>
+          <div class="effort">
+            <div class="contentEffortBar">
+              <div class="effortBar" style="width: 0%">
+                <p class="barcount" id="effortCount"></p>
+              </div>
+            </div>
+          </div>
+          <div class="checkboxs">
+            <input type="checkbox" id="traumatized" name="traumatized" value="traumatized"/>
+            <label for="traumatized"> Traumatizado</label>
+            <input type="checkbox" id="crazed" name="crazed" value="crazed" />
+            <label for="crazed"> Enlouquecido</label>
+        </div>
+        </div>
+
+        <div class="extra">
+          <div class="damage">
+            <p>Movimento</p>
+            <input type="text"/>
+          </div>
+          <div class="body">
+          </div>
+          <div class="exposure">
+            <p>Obsessão</p>
+            <input type="text"/>
+          </div>
+        </div>
+      </div>
+      <div class="attributes border">
+        <h2 class="grid-title">ATRIBUTOS</h2>
+        <hr/>
+        <div class="attributesList" id="attributesList"></div>
+        <br>
+        <div class="resistence"> 
+          <img class="shield" src="img/pngwing.com.png" alt=""><h4>DEFESA</h4>
+          <input type="text" style="font-size: 50px;" size="1" />
+          <br>
+          <br>
+          <h4>Resistencias: <input type="text"/></h4>
+          
+           <!--
+          <select>
+            <option></option>
+            <option>Adaga de Aparagem</option>
+            <option>Lamina Oculta</option>
+            <option>Escudo de Madeira</option>
+            <option>?</option>
+          </select>
+         
+            <div>
+              <p>Cabeça <input type="text" size="5"/>PV</p>
+          <img class="human" src="img/human-151009_640.png" alt="">
+          <p>Torso <input type="text" size="5"/>PV</p>
+            </div>-->
+        </div>
+    </div>
+    
+      <div class="expertise border">
+        <h2 class="grid-title">PERICIAS</h2>
+        <hr/>
+        <table class="pericia">
+        <tr>
+          <th>Nome</th>
+          <th>|</th>
+          <th>Atributo</th>
+          <th>|</th>
+          <th>Treinamento </th>
+          <th>|</th>
+          <th>Quantidade </th>
+        </tr>
+      <tr>
+        <td>Lutar</td>
+        <td>|</td>
+        <td>Força</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Linguagem ⧪</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Fortitude</td>
+        <td>|</td>
+        <td>Vigor</td>
+        <td>|</td>
+        <td><select>
+          <option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Intimidação</td>
+        <td>|</td>
+        <td>Poder</td>
+        <td>|</td>
+        <td><select>
+          <option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Atletismo⧫</td>
+        <td>|</td>
+        <td>Força</td>
+        <td>|</td>
+        <td><select>
+          <option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Furtividade</td>
+        <td>|</td>
+        <td>Agilidade</td>
+        <td>|</td>
+        <td><select>
+          <option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Sobrevivência</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option>></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Diplomacia</td>
+        <td>|</td>
+        <td>Poder</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Bloqueio</td>
+        <td>|</td>
+        <td>Força</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Iniciativa</td>
+        <td>|</td>
+        <td>Agilidade</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Ciências ⧪</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Percepção</td>
+        <td>|</td>
+        <td>Poder</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Investigação</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Medicina</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Artes⧪</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+          
+      </tr>
+      <tr>
+        <td>Atualidades</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Tecnologia ⧪</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Religião ⧪</td>
+        <td>|</td>
+        <td>Poder</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Reflexos ⧫</td>
+        <td>|</td>
+        <td>Agilidade</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Tática ⧪</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Intuição</td>
+        <td>|</td>
+        <td>Poder</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Pontaria</td>
+        <td>|</td>
+        <td>Agilidade</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Pilotagem ⧪</td>
+        <td>|</td>
+        <td>Agilidade</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+      <tr>
+        <td>Engenharia</td>
+        <td>|</td>
+        <td>Intelecto</td>
+        <td>|</td>
+        <td><select>
+          <option></option>
+          <option>Destreinado(0)</option>
+          <option>Treinado(+5)</option>
+          <option >Veterano(+10)</option>
+          <option>Expert(+15)</option>
+          <option>Absoluto(+20)</option></td>
+          <td>|</td>
+          <td><input type="text"/></td>
+      </tr>
+        </table>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+      <div class="combat border">
+        <div class="combatHeader">
+          <h2 class="grid-title">COMBATE</h2>
+          <button id="addWeapon">&plus;</button>
+        </div>
+        <hr />
+
+        <table class="weapons" id="weapons">
+          <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Dano</th>
+            <th>Nun. Atual</th>
+            <th>Num. Máximo</th>
+            <th>Ataque</th>
+            <th>Alcance</th>
+            <th>Defeito</th>
+            <th>Área</th>
+          </tr>
+        </table>
+      </div>
+
+      <div class="expertise2 border">
+        <h2 class="grid-title">Aptidões</h2>
+        <hr/>
+        <table >
+            <tr class="aptidões">
+              <th>Nome</th>
+              <th>|</th>
+              <th>Tipo</th>
+              <th>|</th>
+              <th>Descrição</th>
+          </tr>
+          <tr >
+            <td><input type="text" size="50"/></td>
+            <td>|</td>
+            <td><select>
+              <option></option>
+              <option>Aniquilador</option>
+              <option>Especialista</option>
+              <option >Vendetta</option>
+              <option>Supremo</option>
+              <option>Mundano</option>
+            </select></td>
+            <td>|</td>
+            <td><input type="text" name="name" size="100"/></td>
+          </tr>
+          <tr >
+            <td><input type="text" size="50"/></td>
+            <td>|</td>
+            <td><select>
+              <option></option>
+              <option>Aniquilador</option>
+              <option>Especialista</option>
+              <option >Vendetta</option>
+              <option>Supremo</option>
+              <option>Mundano</option>
+            <td>|</td>
+            <td><input type="text" name="name" size="100"/></td>
+          </tr>
+          <tr >
+            <td><input type="text"size="50"/></td>
+            <td>|</td>
+            <td><select>
+              <option></option>
+              <option>Aniquilador</option>
+              <option>Especialista</option>
+              <option >Vendetta</option>
+              <option>Supremo</option>
+              <option>Mundano</option>
+            </select></td>
+            <td>|</td>
+            <td><input type="text" name="name" size="100"/></td>
+          </tr>
+          <tr >
+            <td><input type="text"size="50"/></td>
+            <td>|</td>
+            <td><select>
+              <option></option>
+              <option>Aniquilador</option>
+              <option>Especialista</option>
+              <option >Vendetta</option>
+              <option>Supremo</option>
+              <option>Mundano</option>
+            </select></td>
+            <td>|</td>
+            <td><input type="text" name="name" size="100"/></td>
+          </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+<!--
+    <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&#10005;</a>
+    <img class="simbolo" src="img/pngwing.com (1).png" alt="Imagem na barra lateral">
+    <a href="principal.html">Inicio</a>
+    <a href="">Livro de Regras(Em Breve)</a>
+    <a href="fichas.html">Fichas de Personagem</a>
+</div>
+
+    <div class="modal-overlay active">
+            <div class="modal">
+                <h2>MODIFICAR VIDA</h2>
+                <hr>
+                <form id="changeLife">
+                    <span class="modalspan">Atual</span>
+                    <input class="modalinput" type="number" name="current" id="lifeCurrent" min="0">
+
+                    <span class="modalspan">Máximo</span>
+                    <input class="modalinput" type="number" name="max" id="lifeMax" min="0">
+                    <input class="modalbutton" type="submit" value="Salvar">
+                </form>
+            </div>
+        </div>
+-->
+    <script src="JS/ficha1.js"></script>
+    <script src="JS/continental.js"></script>
+  </body>
+</html>
